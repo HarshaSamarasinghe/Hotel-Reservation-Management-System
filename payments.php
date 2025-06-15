@@ -28,6 +28,19 @@
     <div id="menu-btn" ><i class="fas fa-bars"></i></div>
    </header>
     
+
+
+ <?php if (!empty($alerts)) : ?>
+        <div class="alert-box">
+            <?php foreach ($alerts as $alert) : ?>
+                <div class="alert <?= $alert['type']; ?>">
+                    <i class="bx <?php $alert['type'] === 'success' ? 'bxs-check-circle' : 'cxs-x-circle'; ?>"></i>
+                    <span><?php $alert['message']; ?></span>
+                </div>
+                <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
    
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="./Script/script.js"></script>

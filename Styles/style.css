@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-:root{
-    --primary:#C67C4E;
-    --secondary:#3A3A6A;
-    --black:#333;
-    --white:#fff;
+
+:root {
+    --primary: #C67C4E;
+    --secondary: #be591a;
+    --black: #000000;
+    --white: #ffffff;
     --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,37 +16,38 @@
     outline: none;
     border: none;
     text-decoration: none;
-    text-transform: capitalize;
     transition: .2s linear;
 }
-body{
-    background: #fff;
+
+body {
+    background: var(--white);
 }
 
-.swiper-pagination-bullet-active{
-    background-color: var(--primary);
-}
-
-html{
+html {
     font-size: 62.5%;
     overflow-x: hidden;
     scroll-padding-top: 9rem;
     scroll-behavior: smooth;
 }
-html::-webkit-scrollbar{
+
+html::-webkit-scrollbar {
     width: .8rem;
 }
-html::-webkit-scrollbar-track{
+
+html::-webkit-scrollbar-track {
     background: transparent;
 }
-html::-webkit-scrollbar-thumb{
+
+html::-webkit-scrollbar-thumb {
     background: var(--primary);
     border-radius: .5rem;
 }
-section{
+
+section {
     padding: 5rem 7%;
 }
-.heading{
+
+.heading {
     font-size: 4rem;
     color: var(--secondary);
     text-align: center;
@@ -52,35 +55,36 @@ section{
     font-weight: bolder;
     margin-bottom: 3rem;
 }
-.heading span{
+
+.heading span {
     color: var(--primary);
     font-size: 4rem;
     text-transform: uppercase;
     font-weight: bolder;
 }
-.btn{
+
+.btn {
     display: inline-block;
     margin-top: 1rem;
-    padding: 1rem;
-    background: #C67C4E;
-    color: #FFFFFF;
-    font-size: 1.7rem;
-    border: none;
-    border-radius: .5rem;
+    padding: 1rem 2rem;
+    background: var(--primary);
+    color: var(--white);
     font-size: 1.7rem;
     font-weight: bold;
-    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
     cursor: pointer;
+    box-shadow: var(--box-shadow);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-.btn:hover{
-    background: #3A3A6A;
-    color: var(--primary);
-    box-shadow:  0 6px 8px rgba(0,0,0,0.15);
+
+.btn:hover {
+    background: var(--secondary);
+    color: var(--white);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
-.header{
-    position:fixed;
+
+.header {
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -92,53 +96,59 @@ section{
     justify-content: space-between;
     padding: 3rem 9%;
 }
-.header .logo{
+
+.header .logo {
     font-size: 2.5rem;
     color: var(--black);
     font-weight: bolder;
-    
 }
-.header .logo i{
+
+.header .logo i {
     color: var(--primary);
     padding-right: .5rem;
 }
-.header .navbar a{
+
+.header .navbar a {
     font-size: 1.7rem;
     color: var(--black);
     margin: 0 1rem;
 }
-.header .navbar a:hover{
-    color: var(--primary);
-}
-.header .navbar btn{
-    margin-top: 0;
-    color: var(--white);
-}
-.header .navbar btn:hover{
+
+.header .navbar a:hover {
     color: var(--primary);
 }
 
-#menu-btn{
+.header .navbar .btn {
+    margin-top: 0;
+    color: var(--white);
+}
+
+.header .navbar .btn:hover {
+    color: var(--primary);
+}
+
+#menu-btn {
     display: none;
     font-size: 2.5rem;
     margin-left: 1.7rem;
     cursor: pointer;
     color: var(--black);
 }
-#menu-btn:hover{
+
+#menu-btn:hover {
     color: var(--primary);
 }
-/*Home Section*/
-.home{
+
+.home {
     padding: 0;
 }
 
-/*Slide Styles*/
-.swiper.home-slider{
+.swiper.home-slider {
     width: 100%;
     height: 110vh;
 }
-.home.slide{
+
+.home.slide {
     min-height: 100vh;
     background-size: cover !important;
     background-position: center !important;
@@ -149,12 +159,10 @@ section{
     z-index: 1;
 }
 
-.home .slide .content{
+.home .slide .content {
     width: 80rem;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 250px;
+    margin: 250px auto 0;
     position: relative;
     z-index: 1;
     opacity: 0;
@@ -162,11 +170,13 @@ section{
     transform: translateY(50px);
     transition: all 1s ease;
 }
-.home .slide .content.active{
+
+.home .slide .content.active {
     opacity: 1;
     transform: translateY(0);
 }
-.home .slide::before{
+
+.home .slide::before {
     content: '';
     position: absolute;
     top: 0;
@@ -176,16 +186,19 @@ section{
     background: rgba(0, 0, 0, 0.6);
     z-index: 0;
 }
-.fade-item{
+
+.fade-item {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.5s ease;
 }
-.content.active .fade-item{
+
+.content.active .fade-item {
     opacity: 1;
     transform: translateY(0);
 }
-.home .slide .content h3{
+
+.home .slide .content h3 {
     font-size: 1.3rem;
     color: var(--white);
     text-transform: uppercase;
@@ -196,92 +209,133 @@ section{
     justify-content: center;
     gap: 1.5rem;
 }
+
 .home .slide .content h3::before,
-.home .slide .content h3::after{
+.home .slide .content h3::after {
     content: '';
     display: inline-block;
     width: 40px;
     height: 2px;
-    background-color: #C67C4E;
+    background-color: var(--primary);
 }
 
-.home .slide .content h2{
+.home .slide .content h2 {
     font-size: 4rem;
     color: var(--white);
     text-transform: uppercase;
     margin-bottom: 2rem;
 }
-.home .slide .content .button-group{
+
+.home .slide .content .button-group {
     display: flex;
     justify-content: center;
     gap: 2rem;
 }
-#btnGetStarted{
+
+#btnGetStarted {
     background-color: var(--white);
     color: var(--black);
-    padding: 0.5rem;
+    padding: 0.5rem 1.5rem;
     font-size: 1.5rem;
     border-radius: 0.5rem;
-   border: 2px solid var(--primary);
+    border: 2px solid var(--primary);
+    transition: all 0.3s ease;
 }
-#btnGetStarted:hover{
+
+#btnGetStarted:hover {
     background-color: var(--primary);
     color: var(--white);
 }
-:root{
-    --primary:#C67C4E;
-    --secondary:#be591a;
-    --black:#000000;
-    --white:#ffffff;
-}
 
-/*Button Styles*/
-.home .slide .content .btn{
-    display: inline-block;
-    padding: 1rem 2rem;
-    text-decoration: none;
-    font-size: 1.1rem;
-    color: var(--white);
-    background: var(--primary);
-    border: none;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-
-}
-.home .slide .content .btn-outline{
+.home .slide .content .btn-outline {
     background-color: transparent;
     color: var(--white);
     border: 2px solid var(--white);
     border-radius: 0.5rem;
     transition: all 0.3s ease;
 }
-.home .slide .content .btn:hover{
-    background-color: var(--secondary);
-    color: var(--white);
-    box-shadow: 0 6px 8px rgba(0,0,0,0.15);
-}
-.home .slide .content .btn-outline:hover{
+
+.home .slide .content .btn-outline:hover {
     background-color: var(--white);
     color: var(--black);
     border-color: var(--primary);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .swiper-button-next,
-.swiper-button-prev{
+.swiper-button-prev {
     color: var(--black);
     width: 5rem;
     height: 5rem;
     background: var(--white);
     border-radius: 50%;
-   
 }
+
 .swiper-button-next:hover,
-.swiper-button-prev:hover{
+.swiper-button-prev:hover {
     background: var(--primary);
     color: var(--white);
 }
+
 .swiper-button-next::after,
-.swiper-button-prev::after{
+.swiper-button-prev::after {
     font-size: 2rem;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--primary);
+}
+
+/* Toast Styles */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 250px;
+    max-width: 350px;
+    height: 50px;
+    padding: 15px 20px;
+    margin-top: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(100%);
+    animation: slideIn 0.4s forwards, fadeOut 0.5s ease 4s forwards;
+    font-size: 1.5rem;
+    font-family: sans-serif;
+}
+
+.toast.success {
+    background-color: #28a745;
+}
+
+.toast.error {
+    background-color: #dc3545;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(100%);
+    }
 }
