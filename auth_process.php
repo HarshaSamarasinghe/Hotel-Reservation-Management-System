@@ -8,22 +8,30 @@ if(isset($_POST['register'])){
     $name = $_POST['fullName'];
     $email = $_POST['email'];
     $phone = $_POST['phoneNumber'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $passwordToBeEncrypted = $_POST['password'];
+    $password = password_hash($passwordToBeEncrypted, PASSWORD_DEFAULT);
     $confirmPassword = $_POST['confirmPassword'];
 
     $checkEmail = $conn->query("SELECT uEmail FROM users WHERE uEmail = '$email'");
     if($checkEmail->num_rows > 0){
         $_SESSION['alerts'][] = [
             'type' => 'error',
-            'message' => 'Email already exists. Please try another!!'
+            'message' => 'Email already exists. Please try another!'
         ];
         $_SESSION['active_form'] = 'register';
     }
+    // else if($passwordToBeEncrypted != $confirmPassword){
+    //     $_SESSION['alerts'][] = [
+    //         'type' => 'error',
+    //         'message' => 'Passwords do not match. Please try again!'
+    //     ];
+
+    // }
     else{
         $conn->query("INSERT INTO users (uFullName, uEmail, uPhoneNumber, uPassword, confirmPassword) VALUES ('$name', '$email', '$phone', '$password', '$confirmPassword')");
         $_SESSION['alerts'][] = [
             'type' => 'success',
-            'message' => 'Registration successful. You can now log in.'
+            'message' => 'Successful! You can now login.'
         ];
         $_SESSION['active_form'] = 'login';
     }

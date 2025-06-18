@@ -1,14 +1,34 @@
 <?php
 session_start();
+require_once 'config.php';
 
 // Retain 'name' but show alerts only once
 $name = $_SESSION['name'] ?? null;
 $alerts = $_SESSION['alerts'] ?? [];
-$active_form = $_SESSION['active_form'] ?? '';
 
 // Clear only used values
-unset($_SESSION['alerts'], $_SESSION['active_form']);
 if ($name !== null) $_SESSION['name'] = $name;
+$N0_ROOMS_AVAILABLE = false; // Initialize availability flag
+
+// Capture form values
+isset($_POST['check_availability']);
+
+$rooms = [];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $check_in = $_POST["check_in"];
+    $check_out = $_POST["check_out"];
+    $adults = (int)$_POST["adults"];
+    $children = (int)$_POST["children"];
+    $room_count = (int)$_POST["rooms"];
+
+    // Example: Search rooms based on adult/child capacity and availability
+    $stmt = $conn->prepare("SELECT * FROM rooms 
+    WHERE isAvailable = 1 AND adultsCapacity >= ? AND childrenCapacity >= ? AND roomCount >= ?");
+    $stmt->bind_param("iii", $adults, $children, $room_count);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rooms = $result->fetch_all(MYSQLI_ASSOC);
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,15 +36,13 @@ if ($name !== null) $_SESSION['name'] = $name;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Now</title>
+    <title>Savendra Gardens</title>
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- swiper js cdn link -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <!-- custom css link -->
     <link rel="stylesheet" href="./Styles/style.css">
-    <link rel="stylesheet" href="./Styles/bookNow.css">
-    
 
     
 </head>
@@ -37,11 +55,130 @@ if ($name !== null) $_SESSION['name'] = $name;
         <a href="payments.php">Payments</a>
         <a href="helpAndSupport.php">Help & Support</a>
         <a href="FAQ.php">FAQ</a>
-        <a id="btnGetStarted" href="getStarted.php">Get Started</a>
         
     </nav>
     <div id="menu-btn" ><i class="fas fa-bars"></i></div>
+
+    <div class="user-auth">
+      <?php if(!empty($name)) : ?>
+        <div class="profile-box">
+          <div class="avatar-circle"><?= strtoupper($name[0]); ?></div>
+          <div class="user-dropdown">
+            <a href="#">My Account</a>
+            <a href="logout.php">Logout</a>
+          </div>
+        </div>
+      <?php else : ?>
+          <a id="btnGetStarted" href="getStarted.php" >Get Started</a>
+      <?php endif; ?>
+      </div>
+      
+
+
    </header>
+   <div class="container">
+   <section class="home" id="home">
+    <div class="swiper home-slider">
+        <div class="swiper-wrapper">
+           <div class="swiper-slide slide" style="background: url(images/bookNowPic01.jpg) no-repeat; background-size: cover;">
+            <div class="form-content">
+              <div class="form-box">
+                <form action="bookNow.php" method="POST" class="availability-form">
+                  <div class="box">
+                    <p>Check In<span>*</span></p>
+                    <input type="date" name="check_in" class="input" required>
+                  </div>
+                  <div class="box">
+                    <p>Check Out<span>*</span></p>
+                    <input type="date" name="check_out" class="input" required>
+                  </div>
+                  <div class="box">
+                    <p>Adults<span>*</span></p>
+                    <select name="adults" id="adults" class="input" required>
+                      <option value="">Select Adults</option>
+                      <option value="1">1 Adult</option>
+                      <option value="2">2 Adults</option>
+                      <option value="3">3 Adults</option>
+                      <option value="4">4 Adults</option>
+                      <option value="5">5 Adults</option>
+                      <option value="6">6 Adults</option>
+                    </select>
+                  </div>
+                  <div class="box">
+                    <p>Children<span>*</span></p>
+                    <select name="children" id="children" class="input" required>
+                      <option value="">Select Children</option>
+                      <option value="0">No Children</option>
+                      <option value="1">1 Child</option>
+                      <option value="2">2 Children</option>
+                      <option value="3">3 Children</option>
+                      <option value="4">4 Children</option>
+                      <option value="5">5 Children</option>
+                      <option value="6">6 Children</option>
+                    </select>
+                  </div>
+                  <div class="box">
+                    <p>Rooms<span>*</span></p>
+                    <select name="rooms" id="rooms" class="input" required>
+                      <option value="">Select Rooms</option>
+                      <option value="1">1 Room</option>
+                      <option value="2">2 Rooms</option>
+                      <option value="3">3 Rooms</option>
+                      <option value="4">4 Rooms</option>
+                      <option value="5">5 Rooms</option>
+                    </select>
+                  </div>
+                  <div class="box">
+                    <input type="submit" value="Check Availability" class="btn-availability" name="check_availability">
+                </form>
+              </div>  
+            </div>   
+              <!-- <?php if($N0_ROOMS_AVAILABLE) : ?>
+                <div class="room-container">
+              </div>
+               <?php endif; ?>             -->
+
+               
+        </div>
+      
+      </div>
+       
+    </section>
+    
+   </div>
+
+  <?php ?>
+
+<?php if (!empty($rooms)): ?>
+    <section class="available-rooms">
+        <h2>Available Rooms</h2>
+        <div class="room-grid">
+            <?php foreach ($rooms as $room): ?>
+                <div class="room-card">
+                    <img src="data:<?= $room['image_type']?> ;base64,<?= base64_encode($room['roomImage']) ?>" alt="<?= htmlspecialchars($room['roomName']) ?>">
+                    <h3><?= htmlspecialchars($room['roomName']) ?></h3>
+                    <p>Adults: <?= $room['adultsCapacity'] ?> | Children: <?= $room['childrenCapacity'] ?></p>
+                    <p class="price">Rs. <?= number_format($room['rPricePerDay'], 2) ?> per night</p>
+                    <a href="roomDetails.php?id=<?= $room['roomID'] ?>" class="btn-view">View Details</a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+<?php elseif (isset($_POST['check_availability'])): 
+    // If the form was submitted but no rooms are available
+    $_SESSION['alerts'][] = [
+        'type' => 'error',
+        'message' => 'No rooms available for the selected criteria.'
+    ];
+
+  ?>
+
+    <section class="available-rooms-false">
+        <h2>Available Rooms</h2>
+        <p style="padding: 20px; font-size: 18px;">No rooms available.</p>
+    </section>
+<?php endif; ?>
+
 
 
      <!-- Toast Container -->
