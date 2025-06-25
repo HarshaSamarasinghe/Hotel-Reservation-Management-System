@@ -1,0 +1,4 @@
+.admin-navigation{
+    display: flex;
+    justify-content: space-between;
+}

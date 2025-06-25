@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once 'config.php'; // Database connection
 
 // Retain 'name' but show alerts only once
 $name = $_SESSION['name'] ?? null;
@@ -19,12 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $check_out = $_POST["check_out"];
     $adults = (int)$_POST["adults"];
     $children = (int)$_POST["children"];
-    $room_count = (int)$_POST["rooms"];
+    
 
     // Example: Search rooms based on adult/child capacity and availability
     $stmt = $conn->prepare("SELECT * FROM rooms 
-    WHERE isAvailable = 1 AND adultsCapacity >= ? AND childrenCapacity >= ? AND roomCount >= ?");
-    $stmt->bind_param("iii", $adults, $children, $room_count);
+    WHERE isAvailable = 1 AND adultsCapacity >= ? AND childrenCapacity >= ? ");
+    $stmt->bind_param("ii", $adults, $children);
     $stmt->execute();
     $result = $stmt->get_result();
     $rooms = $result->fetch_all(MYSQLI_ASSOC);
@@ -132,11 +132,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="submit" value="Check Availability" class="btn-availability" name="check_availability">
                 </form>
               </div>  
-            </div>   
-              <!-- <?php if($N0_ROOMS_AVAILABLE) : ?>
+              
+            </div> 
+
+              <?php if(isset($_POST['check_availability'])) : ?>
                 <div class="room-container">
-              </div>
-               <?php endif; ?>             -->
+                 <h2 class="room-container-title">According to your search<br>We Have the best options in the area<br> Scroll down to see.</h2>
+                </div>
+              <?php else: ?>
+                <div class="room-container">
+                 <h2 class="room-container-title">Fill the above form to see options.</h2>
+                </div>
+               <?php endif; ?>            
 
                
         </div>
@@ -155,11 +162,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="room-grid">
             <?php foreach ($rooms as $room): ?>
                 <div class="room-card">
-                    <img src="data:<?= $room['image_type']?> ;base64,<?= base64_encode($room['roomImage']) ?>" alt="<?= htmlspecialchars($room['roomName']) ?>">
-                    <h3><?= htmlspecialchars($room['roomName']) ?></h3>
+                    <img src="uploads/<?= $room['roomImage'] ?>" alt="<?= htmlspecialchars($room['roomNumber']) ?>">
+                    <h3><?= htmlspecialchars($room['roomNumber']) ?></h3>
                     <p>Adults: <?= $room['adultsCapacity'] ?> | Children: <?= $room['childrenCapacity'] ?></p>
                     <p class="price">Rs. <?= number_format($room['rPricePerDay'], 2) ?> per night</p>
-                    <a href="roomDetails.php?id=<?= $room['roomID'] ?>" class="btn-view">View Details</a>
+                    <a href="singleRoomDetails.php?id=<?= $room['roomID'] ?>" class="btn-view">View Details</a>
                 </div>
             <?php endforeach; ?>
         </div>
