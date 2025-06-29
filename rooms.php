@@ -1,14 +1,24 @@
 <?php
 session_start();
+require_once 'config.php'; // Database connection
 
 // Retain 'name' but show alerts only once
 $name = $_SESSION['name'] ?? null;
 $alerts = $_SESSION['alerts'] ?? [];
-$active_form = $_SESSION['active_form'] ?? '';
 
 // Clear only used values
-unset($_SESSION['alerts'], $_SESSION['active_form']);
 if ($name !== null) $_SESSION['name'] = $name;
+$N0_ROOMS_AVAILABLE = false; // Initialize availability flag
+
+// Capture form values
+isset($_POST['check_availability']);
+
+$rooms = [];
+    $stmt = $conn->prepare("SELECT * FROM rooms");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rooms = $result->fetch_all(MYSQLI_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -52,10 +62,70 @@ if ($name !== null) $_SESSION['name'] = $name;
           <a id="btnGetStarted" href="getStarted.php" >Get Started</a>
       <?php endif; ?>
       </div>
-      
-
-
    </header>
+
+   
+<?php if (!empty($rooms)): ?>
+    <section class="available-rooms">
+        <h2>Our Rooms</h2>
+        <div class="room-grid">
+            <?php foreach ($rooms as $room): ?>
+                <div class="room-card">
+                    <img src="uploads/<?= $room['roomImage'] ?>" alt="<?= htmlspecialchars($room['roomNumber']) ?>">
+                    <h3><?= htmlspecialchars($room['roomType']) ?> Room</h3>
+                    <p><?= htmlspecialchars($room['roomDescription']) ?></p>
+                    <h4 class="price">Rs. <?= number_format($room['rPricePerDay'], 2) ?> <span class="price-span">per night</span></h4>
+                    <div class="stars">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="<?= $room['isAvailable'] == 1 ? 'available' : 'not-available' ?>">
+                      <?= $room['isAvailable'] == 1 ? 'Available' : 'Not Available' ?>
+                    </span><br>
+                    <div class="responsive-btn"><a href="singleRoomDetails.php?id=<?= $room['roomID'] ?>" class="btn-view">View Details</a></div>
+                    
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+    <?php else : ?>
+    <section class="available-rooms-false">
+        <h2>Our Rooms</h2>
+        <p style="padding: 20px; font-size: 18px;">No rooms available.</p>
+    </section>
+<?php endif; ?>
+
+   <!-- <section class="room" id="room">
+    <h1 class="heading">Our Rooms</h1>
+    <div class="swiper room-slider">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide slide">
+          <div class="image">
+            <span class="price">Rs.1000</span>
+            <img src="images/hotel.jpg" alt="">
+            <a href="" class="fas fa-shopping-cart"></a>
+          </div>
+          <div class="content">
+            <h3>exclusive room</h3>
+            <p>sample sdfhidjgsos sfhsdiufhsdhjvg seghusidfhsig senijahgbuanfg</p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <a href="" class="btn">Book Now</a>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+   </section> -->
     
    
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>

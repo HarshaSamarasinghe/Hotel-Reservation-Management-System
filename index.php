@@ -96,8 +96,56 @@ if ($name !== null) $_SESSION['name'] = $name;
     </div>
 
    </section>
+
+   <!-- about Section -->
+  <section class="about" id="about">
+  <h1 class="heading">About <span>Us</span></h1>
+  <div class="row">
+    <div class="image">
+      <img src="images/aboutUs.jpg" alt="Savendra Garden">
+    </div>
+    <div class="content">
+      <h3>Welcome to Savendra Gardens</h3>
+      <p>
+        Nestled amidst the lush greenery and peaceful surroundings, <strong>Savendra Gardens</strong> is your perfect escape from the 
+        hustle and bustle of everyday life. Our hotel blends modern luxury with natural beauty, offering a serene retreat
+         for travelers seeking comfort, relaxation, and memorable experiences.<br>
+
+        At Savendra Gardens, we pride ourselves on exceptional service, eco-friendly hospitality, and attention to every detail. 
+        Whether you're here for a romantic getaway, a family vacation, or a business trip, we ensure your stay is both peaceful and inspiring.<br>
+
+        From tastefully designed rooms and lush garden views to personalized guest services and convenient amenities, we create an environment 
+        where you feel at home , yet completely refreshed.<br>
+        Come experience <strong>Savendra Gardens</strong>, where every stay tells a story.
+      </p>
+
+      <div class="philosophy">
+  <div class="philosophy-item">
+    <i class="fas fa-globe"></i>
+    <h4>Global Elegance</h4>
+    <p>Our design and ambiance reflect a refined global standard, 
+        offering every guest a touch of luxury and sophistication inspired by the world's finest stays.</p>
+  </div>
+  <div class="philosophy-item">
+    <i class="fas fa-heart"></i>
+    <h4>Heartfelt Service</h4>
+    <p>We believe in genuine hospitality. Every detail, from your arrival to your farewell, 
+        is guided by warmth, care, and a deep passion for guest satisfaction.</p>
+  </div>
+  <div class="philosophy-item">
+    <i class="fas fa-leaf"></i>
+    <h4>Eco-Friendly Living</h4>
+    <p>At Savendra Gardens, sustainability is more than a promise. We embrace green choices
+         to protect nature and ensure a cleaner tomorrow.</p>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
  
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

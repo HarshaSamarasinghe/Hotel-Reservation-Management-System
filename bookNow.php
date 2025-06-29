@@ -161,13 +161,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2>Available Rooms</h2>
         <div class="room-grid">
             <?php foreach ($rooms as $room): ?>
-                <div class="room-card">
+              <div class="room-card">
                     <img src="uploads/<?= $room['roomImage'] ?>" alt="<?= htmlspecialchars($room['roomNumber']) ?>">
-                    <h3><?= htmlspecialchars($room['roomNumber']) ?></h3>
-                    <p>Adults: <?= $room['adultsCapacity'] ?> | Children: <?= $room['childrenCapacity'] ?></p>
-                    <p class="price">Rs. <?= number_format($room['rPricePerDay'], 2) ?> per night</p>
-                    <a href="singleRoomDetails.php?id=<?= $room['roomID'] ?>" class="btn-view">View Details</a>
+                    <h3><?= htmlspecialchars($room['roomType']) ?> Room</h3>
+                    <p><?= htmlspecialchars($room['roomDescription']) ?></p>
+                    <h4 class="price">Rs. <?= number_format($room['rPricePerDay'], 2) ?> <span class="price-span">per night</span></h4>
+                    <div class="stars">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="<?= $room['isAvailable'] == 1 ? 'available' : 'not-available' ?>">
+                      <?= $room['isAvailable'] == 1 ? 'Available' : 'Not Available' ?>
+                    </span><br>
+                    <div class="responsive-btn"><a href="singleRoomDetails.php?id=<?= $room['roomID'] ?>" class="btn-view">View Details</a></div>
+                    
                 </div>
+                
             <?php endforeach; ?>
         </div>
     </section>

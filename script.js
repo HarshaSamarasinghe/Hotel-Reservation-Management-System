@@ -86,6 +86,36 @@ slides.forEach(slide => {
     observer.observe(slide);
 });
 
+//About us
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Select the philosophy section
+    const philosophySection = document.querySelector('.about .row .content .philosophy');
+    const philosophyItems = document.querySelectorAll('.philosophy-item');
+
+    // Create an Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add animation class to each item when section is visible
+                philosophyItems.forEach(item => {
+                    item.classList.add('animate');
+                });
+                // Disconnect the observer after triggering
+                observer.disconnect();
+            }
+        });
+    }, {
+        // Options: trigger when 20% of the element is visible
+        threshold: 0.2
+    });
+
+    // Start observing the philosophy section
+    if (philosophySection) {
+        observer.observe(philosophySection);
+    }
+});
+
 
 
 var swiper = new Swiper(".room-slider", {
@@ -221,35 +251,7 @@ var swiper = new Swiper(".review-slider", {
     },
 });
 
-// services
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Select the philosophy section
-    const philosophySection = document.querySelector('.about .row .content .philosophy');
-    const philosophyItems = document.querySelectorAll('.philosophy-item');
-
-    // Create an Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add animation class to each item when section is visible
-                philosophyItems.forEach(item => {
-                    item.classList.add('animate');
-                });
-                // Disconnect the observer after triggering
-                observer.disconnect();
-            }
-        });
-    }, {
-        // Options: trigger when 20% of the element is visible
-        threshold: 0.2
-    });
-
-    // Start observing the philosophy section
-    if (philosophySection) {
-        observer.observe(philosophySection);
-    }
-});
 
 // services
 

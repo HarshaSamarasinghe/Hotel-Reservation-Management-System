@@ -45,7 +45,11 @@ if (!$room) {
 
     
 </head>
-<body>
+<body style="background-image: url(images/bookNowPic01.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+    background-position: center;">
    <header class="header">
     <a href="index.php" class="logo"><i class="fas fa-hotel"></i> Savendra Garden</a>
     <nav class="navbar">
@@ -74,81 +78,66 @@ if (!$room) {
   </header>
     <div class="free-space"></div>
 
-    <div class="booking-container">
-  <!-- Guest Details Form -->
-  <div class="booking-form-section">
-    <h2><?= htmlspecialchars($room['roomType']) ?> Room</h2>
-    <div class="row">
-      <div>
-        <label>Check In</label>
-        <input type="date" value="2025-06-23">
+  <div class="booking-container" >
+  
+    <div class="booking-form-section">
+      <h2><?= htmlspecialchars($room['roomType']) ?> Room</h2>
+      <div class="row">
+        <div>
+          <label>Check In</label>
+          <input type="text" value="2025-06-24" readonly>
+        </div>
+        <div>
+          <label>Check Out</label>
+          <input type="date" value="2025-06-24" readonly>
+        </div>
       </div>
-      <div>
-        <label>Check Out</label>
-        <input type="date" value="2025-06-24">
+
+      <div class="row">
+        <div>
+          <label>First Name *</label>
+          <input type="text">
+        </div>
+        <div>
+          <label>Last Name *</label>
+          <input type="text">
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Adult</label>
+          <input type="text" value="adult size" readonly>
+        </div>
+        <div>
+          <label>Child</label>
+          <input type="text" value="child size" readonly>
+        </div>
+      </div>
+
+      <label>Special Request</label>
+      <textarea placeholder="Special Request"></textarea>
+
+      <label>Estimated arrival time</label>
+      <input type="text" placeholder="AM/PM">
+
+      <label>Contact Details</label>
+      <div class="row">
+        <div>
+           <input type="tel" placeholder="Phone Number*" name="phoneNumber" required pattern="^0\d{9}$" maxlength="10" 
+                  title="Phone number must be 10 digits and start with 0" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        </div>
+        <div>
+          <input type="email" placeholder="Email *">
+        </div>
       </div>
     </div>
-
-    <div class="row">
-      <div>
-        <label>First Name *</label>
-        <input type="text">
-      </div>
-      <div>
-        <label>Last Name *</label>
-        <input type="text">
-      </div>
-    </div>
-
-    <div class="row">
-      <div>
-        <label>Adult</label>
-        <select>
-          <option>1</option>
-          <option>2</option>
-        </select>
-      </div>
-      <div>
-        <label>Child</label>
-        <select>
-          <option>1</option>
-          <option>0</option>
-        </select>
-      </div>
-    </div>
-
-    <label>Child-1 Age *</label>
-    <select>
-      <option>0</option>
-      <option>1</option>
-      <option>2</option>
-    </select>
-
-    <label>Special Request</label>
-    <textarea placeholder="Special Request"></textarea>
-
-    <label>Estimated arrival time</label>
-    <select>
-      <option>02:00 pm</option>
-      <option>03:00 pm</option>
-    </select>
-
-    <label>Contact Details</label>
-    <div class="row">
-      <div>
-        <input type="text" placeholder="Country Code *">
-      </div>
-      <div>
-        <input type="email" placeholder="Email *">
-      </div>
-    </div>
-  </div>
 
   <!-- Booking Summary -->
   <div class="booking-section">
     <h2>Booking Details</h2>
     <div class="summary-box">
-      <div><strong>Standard Room</strong> - Room Only</div>
+      <div><strong><?= htmlspecialchars($room['roomType']) ?> Room</strong></div>
       <div>Check In: 23 Jun 2025</div>
       <div>Check Out: 24 Jun 2025</div>
       <div>Price: LKR 8,263</div>
