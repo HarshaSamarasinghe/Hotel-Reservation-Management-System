@@ -100,7 +100,7 @@ if (!$room) {
 
   <!-- Room Details -->
   <div class="room-details-container">
-    <a href="bookNow.php" class="back-arrow"><i class="fa fa-angle-left" style="font-size:36px"></i></a>
+    <a href="rooms.php" class="back-arrow"><i class="fa fa-angle-left" style="font-size:36px"></i></a>
     
     <div class="room-header">
       <h2><?= htmlspecialchars($room['roomNumber']) ?></h2>

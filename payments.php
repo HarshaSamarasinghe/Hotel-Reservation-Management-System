@@ -32,7 +32,7 @@ if ($name !== null) $_SESSION['name'] = $name;
     <nav class="navbar">
         <a href="index.php">Home</a>
         <a href="rooms.php">Rooms</a>
-        <a href="payments.php">Payments</a>
+        <a href="gallery.php">Payments</a>
         <a href="helpAndSupport.php">Help & Support</a>
         <a href="FAQ.php">FAQ</a>
         
@@ -52,11 +52,11 @@ if ($name !== null) $_SESSION['name'] = $name;
           <a id="btnGetStarted" href="getStarted.php" >Get Started</a>
       <?php endif; ?>
       </div>
-      
-
-
    </header>
     
+<div class="free-space"></div>
+
+
 
 
  <?php if (!empty($alerts)) : ?>
@@ -72,6 +72,6 @@ if ($name !== null) $_SESSION['name'] = $name;
 
    
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="./Script/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

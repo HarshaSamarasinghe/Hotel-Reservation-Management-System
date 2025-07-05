@@ -19,8 +19,11 @@
 }
 
 body {
-  background-color: #EDD6C8;
-  background: linear-gradient(to right, #e2e2e2, #EDD6C8);
+  /* background-color: #EDD6C8;
+  background: linear-gradient(to right, #e2e2e2, #EDD6C8); */
+  background: url("../images/loginBackground.jpg");
+  background-size: cover;
+  background-position: center;
  
 }
 section{
@@ -41,10 +44,10 @@ section{
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
   position: relative;
   overflow: hidden;
-  width: 900px;
+  width: 800px;
   max-width: 1200px;
-  height: 80vh;
-  max-height: 600px;
+  height: 70vh;
+  max-height: 70vh;
   display: flex;
   z-index: 1;
 }

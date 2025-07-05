@@ -106,7 +106,7 @@ if ($name !== null) $_SESSION['name'] = $name;
     </div>
     <div class="content">
       <h3>Welcome to Savendra Gardens</h3>
-      <p>
+      <p class="about-description">
         Nestled amidst the lush greenery and peaceful surroundings, <strong>Savendra Gardens</strong> is your perfect escape from the 
         hustle and bustle of everyday life. Our hotel blends modern luxury with natural beauty, offering a serene retreat
          for travelers seeking comfort, relaxation, and memorable experiences.<br>
@@ -143,6 +143,117 @@ if ($name !== null) $_SESSION['name'] = $name;
     </div>
   </div>
 </section>
+<!-- about Section End -->
+
+<!-- Service section starts  -->
+
+<section class="services" id="services">
+  <h1 class="heading">Our <span>Services</span></h1>
+  <div class="box-container">
+    <div class="box">
+      <i class="fas fa-swimming-pool"></i>
+      <h3>Swimming Pool</h3>
+      <p>Enjoy a refreshing dip in our luxurious outdoor pool.</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-utensils"></i>
+      <h3>Food & Drink</h3>
+      <p>Delight in a variety of local and international cuisine.</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-hotel"></i>
+      <h3>Restaurant</h3>
+      <p>Dine in style with gourmet meals served daily.</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-dumbbell"></i>
+      <h3>Fitness</h3>
+      <p>Stay active with our fully equipped fitness center.</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-spa"></i>
+      <h3>Beauty Spa</h3>
+      <p>Relax and rejuvenate with our signature spa treatments.</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-umbrella-beach"></i>
+      <h3>Resort Beach</h3>
+      <p>Unwind by the private beach with golden sands and waves.</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-concierge-bell"></i>
+      <h3>24/7 Concierge</h3>
+      <p>Our concierge team is always here to assist you.</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-parking"></i>
+      <h3>Car Parking</h3>
+      <p>Safe and spacious parking facilities available onsite.</p>
+    </div>
+  </div>
+</section>
+<!--Service section end-->
+
+<section class="gallery" id="gallery">
+        <h1 class="heading">Our <span> Gallery</span></h1>
+        <div class="swiper gallery-slider">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide slide">
+                <img src="./images/gallery01.jpg" alt="">
+                <div class="icon">
+                  <i class="fas fa-magnifying-glass-plus"></i>
+                </div>
+            </div>
+            <div class="swiper-slide slide">
+                <img src="./images/gallery02.jpg" alt="">
+                <div class="icon">
+                  <i class="fas fa-magnifying-glass-plus"></i>
+                </div>
+            </div>
+            <div class="swiper-slide slide">
+                <img src="./images/gallery03.jpg" alt="">
+                <div class="icon">
+                  <i class="fas fa-magnifying-glass-plus"></i>
+                </div>
+            </div>
+            <div class="swiper-slide slide">
+                <img src="./images/gallery04.jpg" alt="">
+                <div class="icon">
+                  <i class="fas fa-magnifying-glass-plus"></i>
+                </div>
+            </div>
+            <div class="swiper-slide slide">
+                <img src="./images/gallery05.jpg" alt="">
+                <div class="icon">
+                  <i class="fas fa-magnifying-glass-plus"></i>
+                </div>
+            </div>
+            <div class="swiper-slide slide">
+                <img src="./images/gallery06.jpg" alt="">
+                <div class="icon">
+                  <i class="fas fa-magnifying-glass-plus"></i>
+                </div>
+            </div>
+            <div class="swiper-slide slide">
+                <img src="./images/gallery07.jpg" alt="">
+                <div class="icon">
+                  <i class="fas fa-magnifying-glass-plus"></i>
+                </div>
+            </div>
+          </div>
+        </div>
+</section>
+<div class="popup-image">
+  <div class="popup-header">
+    <span class="image-count">1/6</span>
+    <span class="close-btn">&times;</span>
+  </div>
+
+  <button class="prev-btn">&#10094;</button>
+  <button class="next-btn">&#10095;</button>
+  <img src="" alt="">
+</div>
 
  
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>

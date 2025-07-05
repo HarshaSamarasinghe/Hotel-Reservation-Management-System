@@ -116,7 +116,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// services
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Select the services container
+    const servicesContainer = document.querySelector('.services .box-container');
+    const serviceBoxes = document.querySelectorAll('.box');
+
+    // Create an Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add animation class to each box when section is visible
+                serviceBoxes.forEach(box => {
+                    box.classList.add('animate');
+                });
+                // Disconnect the observer after triggering
+                observer.disconnect();
+            }
+        });
+    }, {
+        // Options: trigger when 20% of the element is visible
+        threshold: 0.2
+    });
+
+    // Start observing the services container
+    if (servicesContainer) {
+        observer.observe(servicesContainer);
+    }
+});
 
 var swiper = new Swiper(".room-slider", {
     spaceBetween: 20,
@@ -253,35 +281,7 @@ var swiper = new Swiper(".review-slider", {
 
 
 
-// services
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Select the services container
-    const servicesContainer = document.querySelector('.services .box-container');
-    const serviceBoxes = document.querySelectorAll('.services .box-container .box');
-
-    // Create an Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add animation class to each box when section is visible
-                serviceBoxes.forEach(box => {
-                    box.classList.add('animate');
-                });
-                // Disconnect the observer after triggering
-                observer.disconnect();
-            }
-        });
-    }, {
-        // Options: trigger when 20% of the element is visible
-        threshold: 0.2
-    });
-
-    // Start observing the services container
-    if (servicesContainer) {
-        observer.observe(servicesContainer);
-    }
-});
 
 // faqs
 document.addEventListener('DOMContentLoaded', function() {
